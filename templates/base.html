@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Collecte des données{% endblock %}</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-gray-50 font-sans leading-normal tracking-normal min-h-screen flex flex-col">
+    
+    <nav class="bg-green-600 p-4 shadow-lg text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold flex items-center hover:text-green-100 transition">
+                <i class="fas fa-leaf mr-2"></i> La Business Intelligence au service de l'Économie
+            </a>
+            <div class="flex items-center space-x-4">
+                {% if user.is_authenticated %}
+                    <div class="flex items-center gap-4">
+    <nav class="hidden lg:flex items-center gap-4 mr-4 border-r border-gray-300 pr-4">
+        <a href="{% url 'analyse_univarie' %}" class="text-sm font-medium text-gray-700 hover:text-blue-600 transition">
+            <i class="fas fa-chart-line mr-1"></i> Dashboard
+        </a>
+        <a href="{% url 'analyse_multidimentionnelle' %}" class="text-sm font-medium text-gray-700 hover:text-blue-600 transition">
+            <i class="fas fa-database mr-1"></i> Données
+        </a>
+        <a href="{% url 'etl' %}" class="text-sm font-medium text-gray-700 hover:text-blue-600 transition">
+            <i class="fas fa-cog mr-1"></i> Admin
+        </a>
+    </nav>
+
+    <span class="hidden md:inline text-sm text-gray-600">
+        Bonjour, <strong class="text-gray-900">{{ user.username }}</strong>
+    </span>
+
+    <a href="{% url 'logout' %}" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg text-sm font-semibold text-white transition shadow-md">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+    </a>
+</div>
+                {% else %}
+                    <a href="{% url 'login' %}" class="hover:underline">Connexion</a>
+                    <a href="{% url 'signup' %}" class="bg-white text-green-600 px-4 py-2 rounded-lg font-bold shadow-md hover:bg-gray-100 transition">S'inscrire</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto mt-10 p-4 flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 text-center py-8 text-gray-500 text-sm mt-auto">
+        <div class="container mx-auto">
+            <p>&copy; OK </p>
+            <p class="mt-2 text-xs uppercase tracking-widest">OK</p>
+        </div>
+    </footer>
+
+</body>
+</html>

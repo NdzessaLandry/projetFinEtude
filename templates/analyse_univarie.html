@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="controls-panel">
+    <form id="filter-form">
+        <div class="control-row">
+            <div class="control-group">
+                <label>Catégorie</label>
+                <select name="var_a" class="filter-input">
+                    {% for cate in categories %}
+                        <option value="{{ cate }}">{{ cate }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Pays</label>
+                <select name="var_c" class="filter-input">
+                    <option value="val_c_1">Cameroun</option>
+                    <option value="val_c_2">Gabon</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Date Début</label>
+                <input type="date" name="start_date" class="filter-input">
+            </div>
+            
+            <div class="control-group">
+                <label>Date Fin</label>
+                <input type="date" name="end_date" class="filter-input">
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="dashboard-grid">
+
+    <div class="chart-card">
+        <h4 class="chart-title">Évolution du prix</h4>
+        <div class="chart-container">
+            <canvas id="chart1"></canvas>
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <h4 class="chart-title">Évolution de la quantité produite</h4>
+        <div class="chart-container">
+            <canvas id="chart2"></canvas>
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <h4 class="chart-title">Évolution des importations</h4>
+        <div class="chart-container">
+            <canvas id="chart3"></canvas>
+        </div>
+    </div>
+
+</div>
+<div><br></div>
+<div class="kpi-container">
+    <div class="kpi-card">
+        <div class="kpi-icon">📦</div>
+        <div class="kpi-content">
+            <span class="kpi-label">Le meilleur prix</span>
+            <h3 class="kpi-value">1 200 €</h3>
+            <p class="kpi-detail">Le pays</p>
+        </div>
+    </div>
+
+    <div class="kpi-card highlight">
+        <div class="kpi-icon">💰</div>
+        <div class="kpi-content">
+            <span class="kpi-label">La plus grande production</span>
+            <h3 class="kpi-value">12 500 tonnes</h3>
+            <p class="kpi-detail">Le pays</p>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Créer un compte - Yaoundé Propre{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-xl">
+    <div class="text-center mb-6">
+        <i class="fas fa-user-plus text-green-600 text-4xl mb-2"></i>
+        <h2 class="text-3xl font-bold text-gray-800">Rejoignez-nous</h2>
+        <p class="text-gray-500"></p>
+    </div>
+    
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-lg transition duration-300">
+            Créer mon compte
+        </button>
+    </form>
+    
+    <div class="mt-6 text-center text-sm">
+        <p class="text-gray-600">Déjà inscrit ? <a href="{% url 'login' %}" class="text-green-600 font-bold hover:underline">Connectez-vous ici</a></p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,275 @@
+/* --- 1. STYLES GLOBAUX --- */
+body { 
+    font-family: Arial, sans-serif; 
+    margin: 0; 
+    padding: 20px; 
+    background-color: #f4f4f4; 
+}
+
+/* --- 2. STYLE COMMUN DES INPUTS (Partout sur le site) --- */
+input[type="text"], input[type="password"], input[type="email"], 
+input[type="number"], input[type="date"], select, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #d1d5db !important; /* Bordure nette */
+    border-radius: 0.5rem;
+    background-color: #ffffff !important;
+    color: #1f2937;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    outline: none;
+}
+
+/* Focus vert (pour tous les champs) */
+input:focus, select:focus, textarea:focus {
+    border-color: #16a34a !important;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.875rem;
+    margin-bottom: 5px;
+}
+
+/* --- 3. FORMULAIRES DE COMPTE (Login, Signup - Centrés et blancs) --- */
+/* On utilise une classe spécifique ou on cible les formulaires qui ne sont pas la barre de recherche */
+.auth-form {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 40px auto;
+}
+
+.auth-form p {
+    margin-bottom: 15px; /* Espace entre les lignes générées par Django */
+}
+
+/* --- 4. BARRE DE RECHERCHE "CAR" (Pleine largeur) --- */
+.search-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 100%; /* PREND TOUTE LA LARGEUR */
+    box-sizing: border-box;
+    align-items: flex-end;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ajustement spécifique pour les inputs dans la barre Car (pas de marge basse) */
+.search-container input, .search-container select {
+    margin-bottom: 0; 
+}
+/* --- PANNEAU DE CONTRÔLE (Dashboard Style) --- */
+
+.controls-panel {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2rem;
+    border: 1px solid #e5e7eb;
+}
+
+.control-row {
+    display: flex;
+    flex-wrap: wrap; /* S'adapte si l'écran est petit */
+    gap: 20px;
+    align-items: flex-end; /* Aligne le bas des inputs */
+}
+
+.control-group {
+    flex: 1;
+    min-width: 200px; /* Évite que les champs soient trop écrasés */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- LABELS --- */
+.control-group label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #4b5563; /* Gris foncé moderne */
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+/* --- INPUTS & SELECTS --- */
+.filter-input {
+    appearance: none; /* Nettoie le style par défaut du navigateur */
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    color: #111827;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+/* Effet au survol */
+.filter-input:hover {
+    border-color: #9ca3af;
+}
+
+/* Effet quand on clique dedans (Focus) */
+.filter-input:focus {
+    background-color: #ffffff;
+    border-color: #2563eb; /* Bleu pro */
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* --- ZONE DU GRAPHIQUE --- */
+#myChart {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    max-height: 450px; /* Évite que le graphique soit trop géant */
+    width: 100% !important;
+}
+
+/* --- RESPONSIVE (Mobile) --- */
+@media (max-width: 640px) {
+    .control-row {
+        flex-direction: column;
+    }
+    .control-group {
+        width: 100%;
+    }
+}
+/* --- 5. BOUTONS --- */
+button, .btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+button:hover { 
+    background-color: #0056b3; 
+}
+
+/* Le conteneur qui force l'alignement horizontal */
+.dashboard-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne sur petit écran */
+    gap: 20px;       /* Espace entre les graphiques */
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* La "Carte" qui contient chaque graphique */
+.chart-card {
+    flex: 1;            /* Force les 3 éléments à se partager l'espace équitablement */
+    min-width: 300px;   /* Largeur minimale avant de passer à la ligne */
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style du titre à l'intérieur de la carte */
+.chart-title {
+    font-size: 0.9rem;
+    color: #374151;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Conteneur interne pour maintenir le ratio du canvas */
+.chart-container {
+    position: relative;
+    height: 300px; /* Ajustez la hauteur souhaitée ici */
+    width: 100%;
+}
+
+/* Responsive : sur tablettes/mobiles, on peut vouloir 1 ou 2 par ligne */
+@media (max-width: 1024px) {
+    .chart-card {
+        flex: 1 1 calc(50% - 20px); /* 2 par ligne sur tablette */
+    }
+}
+
+@media (max-width: 768px) {
+    .chart-card {
+        flex: 1 1 100%; /* 1 par ligne sur mobile */
+    }
+}
+.kpi-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.kpi-card {
+    flex: 1;
+    min-width: 250px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid #edf2f7;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Version mise en avant (ex: pour le prix le plus cher) */
+.kpi-card.highlight {
+    border-left: 5px solid #e53e3e; /* Rouge pour le prix "cher" */
+}
+
+.kpi-icon {
+    font-size: 2rem;
+    background: #f7fafc;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.kpi-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #718096;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.kpi-value {
+    margin: 5px 0;
+    font-size: 1.4rem;
+    color: #2d3748;
+    font-weight: 800;
+}
+
+.kpi-detail {
+    font-size: 0.85rem;
+    color: #a0aec0;
+    margin: 0;
+}
