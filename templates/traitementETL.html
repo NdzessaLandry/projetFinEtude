@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto">
+
+    {% if is_dataset_preview %}
+    <div class="mt-8">
+        <h3 class="text-lg font-bold mb-4"><i class="fas fa-eye mr-2"></i> Aperçu des données</h3>
+        <div class="table-preview-container">
+            <table class="table-preview">
+                <thead>
+                    <tr>
+                        {% for col in columns %}
+                        <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in dataset_preview %}
+                    <tr>
+                        {% for value in row %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <form action="{% url 'finalize_etl' %}" method="post">
+        {% csrf_token %}
+        <div class="operation-grid">
+            <label class="op-card">
+                <input type="radio" name="op_type" value="enrich" class="mr-2">
+                <span class="font-bold text-lg">Enrichir une Table existante</span>
+                <p class="text-sm text-gray-500 mt-2">Ajoute des données à une table déjà présente en base.</p>
+            </label>
+        </div>
+
+        <div class="config-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="control-group">
+                    <label>Sélectionner la Table de Fait cible</label>
+                    <select name="target_fact_table" class="filter-input">
+                        <option value="wdi_economy">WDI_Economy_Fact</option>
+                        <option value="wdi_health">WDI_Health_Fact</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Sélectionner une colonne qui représentera le fait</label>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        {% for col in columns %}
+                        <label class="inline-flex items-center bg-white border px-3 py-1 rounded-full text-sm">
+                            <input type="checkbox" name="dimensions" value="{{ col }}" class="mr-2"> {{ col }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Dimensions à lier à la table de fait </label>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        {% for col in columns %}
+                        <label class="inline-flex items-center bg-white border px-3 py-1 rounded-full text-sm">
+                            <input type="checkbox" name="dimensions" value="{{ col }}" class="mr-2"> {{ col }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <button type="submit" class="btn-primary w-full mt-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold shadow-lg transition">
+            <i class="fas fa-file-import mr-2"></i> CHARGER DANS LA BASE DE DONNÉES
+        </button>
+    </form>
+    <div class="mt-12 p-8 border-2 border-dashed border-blue-200 rounded-3xl bg-blue-50/50 flex flex-col items-center text-center">
+    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-lg mb-4">
+        <i class="fas fa-plus-circle fa-2x"></i>
+    </div>
+    
+    <h3 class="text-xl font-bold text-gray-800">Nouvelle Table de Fait</h3>
+    <p class="text-gray-500 max-w-md mb-6 mt-2">
+        Le dataset ne correspond à aucune table existante ? Créez une nouvelle structure de stockage personnalisée basée sur vos données actuelles.
+    </p>
+
+    <a href="{% url 'creer_table_fait' %}" class="btn-create-table">
+        <span class="flex items-center">
+            <i class="fas fa-magic mr-2"></i> 
+            Générer la structure de la table
+        </span>
+    </a>
+</div>
+    {% endif %}
+
+</div>
+{% endblock %}

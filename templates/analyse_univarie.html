@@ -8,8 +8,15 @@
                 <label>Catégorie</label>
                 <select name="var_a" class="filter-input">
                     {% for cate in categories %}
-                        <option value="{{ cate }}">{{ cate }}</option>
+                        <option id="{{ cate }}" value="{{ cate }}">{{ cate }}</option>
                     {% endfor %}
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Pays</label>
+                <select name="var_b" class="filter-input">
+                    <option value="val_b_1">Mais</option>
+                    <option value="val_b_2">Plantain</option>
                 </select>
             </div>
             <div class="control-group">

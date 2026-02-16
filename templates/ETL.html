@@ -1,5 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>Ici on affichera le processus ETL</p>
+<div id="message">
+    <div class="center-wrapper">
+    <div class="upload-container">
+        <p id="p">Uploader un fichier de données et apuyer sur le bouton pour débuter l'extraction des données</p>
+    <form action="{% url 'chargement' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="file-upload" class="custom-upload">
+            <div class="upload-content">
+                <i class="fas fa-cloud-upload-alt fa-3x"></i>
+                <p>Glissez vos fichiers ici ou <span>parcourez</span></p>
+                <small>Formats acceptés : CSV, Excel, TXT, PDF</small>
+            </div>
+            <input id="file-upload" name="file_source" type="file" accept=".csv, .xlsx, .xls, .txt, .pdf" multiple />
+        </label>
+        <button type="submit" class="btn-primary w-full mt-6 py-4">
+    <i class="fas fa-rocket mr-2"></i> Lancer l'importation
+</button>
+    </form>
+</div>
+</div>
+</div>
+
+
 {% endblock content %}
